@@ -276,6 +276,11 @@
   <ItemGroup>
     <Font Include="Example\YomogiFont.ttf" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="asc\TCPString.hpp" />
+    <ClInclude Include="asc\TCPStringClient.hpp" />
+    <ClInclude Include="asc\TCPStringServer.hpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
