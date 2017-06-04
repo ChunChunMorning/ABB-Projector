@@ -121,6 +121,14 @@ void Main()
 			Cursor::SetStyle(gui.style.visible ? CursorStyle::Default : CursorStyle::None);
 		}
 
+		Mat3x2 matrix(
+			Parse<float>(gui.textField(L"scaleX").text), 0,
+			0, Parse<float>(gui.textField(L"scaleY").text),
+			Parse<float>(gui.textField(L"offsetX").text), Parse<float>(gui.textField(L"offsetY").text)
+		);
+
+		const Transformer2D transformer(matrix);
+
 		for (const auto& rect : rects)
 		{
 			rect.draw();
