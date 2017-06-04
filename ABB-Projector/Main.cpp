@@ -22,7 +22,7 @@ GUI CreateGUI(const Vec2& scale, const Vec2& offset, int port)
 	gui.addln(GUIText::Create(L"Network"));
 	gui.addln(L"state", GUIText::Create(L"State: Stop"));
 	gui.add(GUIText::Create(L"Port"));
-	gui.addln(L"port", GUITextField::Create(5));
+	gui.add(L"port", GUITextField::Create(5));
 	gui.addln(L"action", GUIButton::Create(L"Run"));
 
 	gui.textField(L"scaleX").setText(ToString(scale.x));
