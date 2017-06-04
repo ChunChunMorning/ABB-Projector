@@ -50,6 +50,8 @@ void Main()
 	asc::TCPStringServer server;
 	bool isAccept = false;
 
+	Array<ColorRect> rects;
+
 	while (System::Update())
 	{
 		if (server.hasError() && isAccept)
@@ -90,10 +92,38 @@ void Main()
 			}
 		}
 
+		if (server.available())
+		{
+			rects.clear();
+
+			String message;
+
+			while (server.readLine(message))
+			{
+				LOG(Format(L"MESSAGE: ", message));
+
+				const auto rect = FromString(message);
+
+				if (rect)
+				{
+					rects.push_back(rect.value());
+				}
+				else
+				{
+					LOG_ERROR(L"FORMAT: ", message);
+				}
+			}
+		}
+
 		if (Input::KeySpace.clicked)
 		{
 			gui.show(!gui.style.visible);
 			Cursor::SetStyle(gui.style.visible ? CursorStyle::Default : CursorStyle::None);
+		}
+
+		for (const auto& rect : rects)
+		{
+			rect.draw();
 		}
 	}
 }
