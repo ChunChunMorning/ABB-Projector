@@ -84,6 +84,9 @@
     <ClCompile Include="Main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="ColorRect.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc">
@@ -406,6 +409,9 @@
     </ClInclude>
     <ClInclude Include="asc\TCPString.hpp">
       <Filter>asc</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorRect.hpp">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,4 +1,5 @@
 ﻿# include <Siv3D.hpp>
+# include "ColorRect.hpp"
 
 GUI CreateGUI(const Vec2& scale, const Vec2& offset, int port)
 {
