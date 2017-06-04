@@ -35,9 +35,28 @@ GUI CreateGUI(const Vec2& scale, const Vec2& offset, int port)
 	return gui;
 }
 
-GUI CreateGUI()
+GUI CreateGUIFromSetting(const FilePath& setting)
 {
-	return CreateGUI(Vec2::One, Vec2::Zero, 50000);
+	INIReader reader(setting);
+
+	if (reader)
+	{
+		Vec2 scale;
+		Vec2 offset;
+		int port;
+
+		scale.x = reader.getOr(L"Scale.x", 1);
+		scale.y = reader.getOr(L"Scale.y", 1);
+		offset.x = reader.getOr(L"Offset.x", 0);
+		offset.y = reader.getOr(L"Offset.y", 0);
+		port = reader.getOr(L"Network.port", 50000);
+
+		return CreateGUI(scale, offset, port);
+	}
+	else
+	{
+		return CreateGUI(Vec2::One, Vec2::Zero, 50000);
+	}
 }
 
 void Main()
@@ -46,11 +65,9 @@ void Main()
 	Window::SetStyle(WindowStyle::Sizeable);
 	Window::Maximize();
 
-	auto gui = CreateGUI();
-
 	asc::TCPStringServer server;
 	bool isAccept = false;
-
+	GUI gui = CreateGUIFromSetting(L"setting.ini");
 	Array<ColorRect> rects;
 
 	while (System::Update())
