@@ -24,6 +24,7 @@ GUI CreateGUI(const Vec2& scale, const Vec2& offset, int port)
 	gui.add(GUIText::Create(L"Port"));
 	gui.add(L"port", GUITextField::Create(5));
 	gui.addln(L"action", GUIButton::Create(L"Run"));
+	gui.addln(L"save", GUIButton::Create(L"Save setting"));
 
 	gui.textField(L"scaleX").setText(ToString(scale.x));
 	gui.textField(L"scaleY").setText(ToString(scale.y));
@@ -119,6 +120,17 @@ void Main()
 		{
 			gui.show(!gui.style.visible);
 			Cursor::SetStyle(gui.style.visible ? CursorStyle::Default : CursorStyle::None);
+		}
+
+		if (gui.button(L"save").pushed)
+		{
+			INIWriter writer(L"setting.ini");
+
+			writer.write(L"Scale", L"x", gui.textField(L"scaleX").text);
+			writer.write(L"Scale", L"y", gui.textField(L"scaleY").text);
+			writer.write(L"Offset", L"x", gui.textField(L"offsetX").text);
+			writer.write(L"Offset", L"y", gui.textField(L"offsetY").text);
+			writer.write(L"Network", L"port", gui.textField(L"port").text);
 		}
 
 		Mat3x2 matrix(
